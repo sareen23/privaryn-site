@@ -75,6 +75,7 @@ h1 em{font-style:italic;color:var(--teal);font-weight:400}
 .hero .eyebrow,.hero h1,.hero .lead,.hero .actions{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
 .hero h1{animation-delay:.12s}.hero .lead{animation-delay:.28s}.hero .actions{animation-delay:.42s}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes fadeinbg{from{opacity:0}to{opacity:.55}}
 .globe{display:block;width:100%;max-width:580px;aspect-ratio:1/1;justify-self:end;animation:fadein 1.8s .35s ease both}
 
 .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:96px;counter-reset:pf}
@@ -203,6 +204,18 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
 .f-top a:hover{color:var(--teal)}
 .f-bot{padding-top:28px;display:grid;gap:10px;font-size:13px}
 
+/* faq */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:88px;align-items:start}
+.faq-grid h2{max-width:14ch}
+.faq details{border-top:1px solid var(--line-2)}
+.faq details:last-child{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;font-family:var(--serif);font-size:clamp(20px,2.1vw,25px);line-height:1.25;letter-spacing:-.01em;transition:color .2s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font-family:var(--sans);font-weight:300;font-size:30px;line-height:1;color:var(--teal);transition:transform .3s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover{color:var(--teal)}
+.faq details p{color:var(--muted);padding:0 48px 28px 0;max-width:66ch;font-size:16.5px}
+
 /* scroll reveal (only when JS is running) */
 .js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
@@ -222,8 +235,10 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
   .nav ul a::after{left:0;right:auto;width:28px}
   .nav .btn.top{display:none}
   .hero{min-height:0;padding:72px 0 72px}
-  .hero .grid,.journey,.about,.contact-grid{grid-template-columns:1fr;gap:48px}
-  .globe{max-width:340px;justify-self:center;margin-top:8px}
+  .hero .grid,.journey,.about,.contact-grid,.faq-grid{grid-template-columns:1fr;gap:48px}
+  .hero .grid{position:relative}
+  .hero .grid>div{position:relative;z-index:1}
+  .globe{position:absolute;left:50%;top:50%;width:min(135vw,620px);max-width:none;transform:translate(-50%,-50%);z-index:0;pointer-events:none;margin:0;justify-self:auto;opacity:.55;animation:fadeinbg 1.8s .35s ease both}
   .proof{grid-template-columns:1fr;margin-top:64px;gap:28px}
   .cols,.pillars,.inds,.cards.two{grid-template-columns:1fr}
   .cols{gap:40px}
@@ -238,9 +253,10 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
   .hero .eyebrow,.hero h1,.hero .lead,.hero .actions{animation:none}
   .globe{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
-  .btn,.card,.nav ul a::after,.ticks li,.ticks li::before{transition:none}
+  .btn,.card,.nav ul a::after,.ticks li,.ticks li::before,.faq summary,.faq summary::after{transition:none}
 }
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do we need to already own a privacy platform?", "acceptedAnswer": {"@type": "Answer", "text": "Not necessarily. Many clients already own a platform and need it configured, automated or brought back in line with how the business runs. Others need help evaluating options and implementing one from the start. We work in both situations."}}, {"@type": "Question", "name": "Which privacy technology platforms do you work with?", "acceptedAnswer": {"@type": "Answer", "text": "OneTrust, BigID, Securiti and Microsoft Purview. Our approach is the same across platforms: design the process first, then configure the technology to support it."}}, {"@type": "Question", "name": "How does an engagement start?", "acceptedAnswer": {"@type": "Answer", "text": "With a conversation about how your organization actually works. From there we assess your current program and tools, then design a program that fits your processes, your people and your technology."}}, {"@type": "Question", "name": "Which privacy laws and regulations do you cover?", "acceptedAnswer": {"@type": "Answer", "text": "We translate U.S. and global privacy regulations, including GDPR and the growing set of U.S. state privacy laws, into practical workflows and platform configuration, and we plan updates as requirements change."}}, {"@type": "Question", "name": "Do you provide legal advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. We design and implement privacy technology and operating processes, and we work alongside your legal and privacy counsel. Nothing on this site is legal advice."}}, {"@type": "Question", "name": "Can you support us after go-live?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Implementation is the starting point. We stay involved to tune the platform, keep your program current with new laws and systems, and bring in senior expertise when you need it."}}, {"@type": "Question", "name": "How do you work with our existing teams?", "acceptedAnswer": {"@type": "Answer", "text": "Alongside them. Our work is senior and hands-on, and we design around the way your teams already operate so the program is adopted and keeps running after we step back."}}, {"@type": "Question", "name": "How is an engagement scoped and priced?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on what you need. You can start with a single assessment, bring us in to design and build, or keep us close as your program grows. Start a conversation and we will recommend a scope that fits."}}]}</script>
 </head>
 <body>
 <header>
@@ -375,6 +391,16 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
       <h2>Platforms we work with.</h2>
       <p class="sub">We are platform-aware rather than platform-bound, and recommend what fits your program.</p>
       <ul class="chips"><li>OneTrust</li><li>BigID</li><li>Securiti</li><li>Microsoft Purview</li></ul>
+    </div>
+  </section>
+  <section class="alt" id="faq">
+    <div class="wrap faq-grid">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions we hear most.</h2>
+        <p class="sub" style="margin-bottom:0">Can&rsquo;t find your answer? <a href="#contact" style="color:var(--teal)">Start a conversation</a>.</p>
+      </div>
+      <div class="faq"><details><summary>Do we need to already own a privacy platform?</summary><p>Not necessarily. Many clients already own a platform and need it configured, automated or brought back in line with how the business runs. Others need help evaluating options and implementing one from the start. We work in both situations.</p></details><details><summary>Which privacy technology platforms do you work with?</summary><p>OneTrust, BigID, Securiti and Microsoft Purview. Our approach is the same across platforms: design the process first, then configure the technology to support it.</p></details><details><summary>How does an engagement start?</summary><p>With a conversation about how your organization actually works. From there we assess your current program and tools, then design a program that fits your processes, your people and your technology.</p></details><details><summary>Which privacy laws and regulations do you cover?</summary><p>We translate U.S. and global privacy regulations, including GDPR and the growing set of U.S. state privacy laws, into practical workflows and platform configuration, and we plan updates as requirements change.</p></details><details><summary>Do you provide legal advice?</summary><p>No. We design and implement privacy technology and operating processes, and we work alongside your legal and privacy counsel. Nothing on this site is legal advice.</p></details><details><summary>Can you support us after go-live?</summary><p>Yes. Implementation is the starting point. We stay involved to tune the platform, keep your program current with new laws and systems, and bring in senior expertise when you need it.</p></details><details><summary>How do you work with our existing teams?</summary><p>Alongside them. Our work is senior and hands-on, and we design around the way your teams already operate so the program is adopted and keeps running after we step back.</p></details><details><summary>How is an engagement scoped and priced?</summary><p>It depends on what you need. You can start with a single assessment, bring us in to design and build, or keep us close as your program grows. Start a conversation and we will recommend a scope that fits.</p></details></div>
     </div>
   </section>
 </div>
@@ -646,7 +672,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
 </script>
 <script>
 (function(){
-  var sel=".cols>div,.card,.proof>div,.pillars>div,.list>div,.ind,.fact,.quote-box,.chips,.cta .wrap,section h2,section .sub,.head-row,.about p,form";
+  var sel=".cols>div,.card,.proof>div,.pillars>div,.list>div,.ind,.fact,.quote-box,.chips,.cta .wrap,section h2,section .sub,.head-row,.about p,form,.faq details";
   var els=document.querySelectorAll(sel);
   if(!("IntersectionObserver" in window)||window.matchMedia("(prefers-reduced-motion: reduce)").matches){return;}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
