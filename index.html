@@ -67,22 +67,15 @@ h3{font-family:var(--serif);font-size:26px;line-height:1.2;font-weight:500;lette
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 .hero{position:relative;overflow:hidden;min-height:min(86vh,820px);display:flex;align-items:center;padding:120px 0 96px;background:linear-gradient(125deg,#09111f 0%,#0d1c33 38%,#0a2230 62%,#09111f 100%);background-size:260% 260%;animation:drift 24s ease-in-out infinite;border-bottom:1px solid var(--line)}
 .hero>.wrap{width:min(1180px,100% - 48px)}
-.hero .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 h1{font-family:var(--serif);font-size:clamp(46px,7.2vw,92px);line-height:1.02;letter-spacing:-.028em;font-weight:500;margin-bottom:30px}
 h1 em{font-style:italic;color:var(--teal);font-weight:400}
 .lead{font-size:clamp(18px,2vw,22px);color:var(--muted);max-width:52ch;margin-bottom:44px;line-height:1.6}
 .actions{display:flex;flex-wrap:wrap;gap:14px}
 .hero .eyebrow,.hero h1,.hero .lead,.hero .actions{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
 .hero h1{animation-delay:.12s}.hero .lead{animation-delay:.28s}.hero .actions{animation-delay:.42s}
-.art{width:100%;max-width:400px;justify-self:end;opacity:.55}
-.art .wire{fill:none;stroke:var(--line-2);stroke-width:1.5}
-.art .wire.lit{stroke:var(--teal);stroke-width:1.5;stroke-dasharray:6 12;animation:flow 4s linear infinite;opacity:.7}
-.art .dot{fill:var(--bg);stroke:var(--teal);stroke-width:2}
-.art .outline{fill:none;stroke:var(--teal);stroke-width:3;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 2.2s .2s ease-out forwards}
-.art .p{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;animation:fade .8s 1.7s ease-out forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes fade{to{opacity:1}}
-@keyframes flow{to{stroke-dashoffset:-36}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.globe{display:block;width:100%;max-width:580px;aspect-ratio:1/1;justify-self:end;animation:fadein 1.8s .35s ease both}
 
 .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:96px;counter-reset:pf}
 .proof div{counter-increment:pf;border-top:1px solid var(--line-2);padding-top:22px}
@@ -217,7 +210,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
 @media (max-width:980px){
   .cards{grid-template-columns:repeat(2,1fr)}
   .f-top{grid-template-columns:1fr 1fr}
-  .art{max-width:300px}
+  .globe{max-width:460px}
 }
 @media (max-width:860px){
   .menu-btn{display:block}
@@ -230,7 +223,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
   .nav .btn.top{display:none}
   .hero{min-height:0;padding:72px 0 72px}
   .hero .grid,.journey,.about,.contact-grid{grid-template-columns:1fr;gap:48px}
-  .art{display:none}
+  .globe{max-width:340px;justify-self:center;margin-top:8px}
   .proof{grid-template-columns:1fr;margin-top:64px;gap:28px}
   .cols,.pillars,.inds,.cards.two{grid-template-columns:1fr}
   .cols{gap:40px}
@@ -243,9 +236,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
 @media (prefers-reduced-motion:reduce){
   .hero{animation:none}
   .hero .eyebrow,.hero h1,.hero .lead,.hero .actions{animation:none}
-  .art .outline{animation:none;stroke-dashoffset:0}
-  .art .p{animation:none;opacity:1}
-  .art .wire.lit{animation:none}
+  .globe{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
   .btn,.card,.nav ul a::after,.ticks li,.ticks li::before{transition:none}
 }
@@ -284,20 +275,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
             <a class="btn ghost" href="#services">Explore services</a>
           </div>
         </div>
-        <svg class="art" viewBox="0 0 470 470" role="img" aria-label="A shield connected to surrounding data systems">
-          <path class="wire" d="M20 90 H120 V170 H150"/>
-          <path class="wire lit" d="M20 90 H120 V170 H150"/>
-          <path class="wire" d="M450 70 H360 V150 H320"/>
-          <path class="wire lit" d="M450 70 H360 V150 H320"/>
-          <path class="wire" d="M20 330 H100 V280 H150"/>
-          <path class="wire lit" d="M20 330 H100 V280 H150"/>
-          <path class="wire" d="M450 360 H370 V290 H320"/>
-          <path class="wire lit" d="M450 360 H370 V290 H320"/>
-          <path class="wire" d="M235 455 V400"/>
-          <circle class="dot" cx="20" cy="90" r="7"/><circle class="dot" cx="450" cy="70" r="7"/><circle class="dot" cx="20" cy="330" r="7"/><circle class="dot" cx="450" cy="360" r="7"/><circle class="dot" cx="235" cy="455" r="7"/>
-          <path class="outline" d="M235 40 L340 76 L340 200 C340 290 296 352 235 392 C174 352 130 290 130 200 L130 76 Z"/>
-          <path class="p" d="M205 290 V150 H250 a36 36 0 0 1 0 72 H205"/>
-        </svg>
+        <canvas class="globe" id="globe" role="img" aria-label="A rotating globe showing data flowing securely between cities around the world"></canvas>
       </div>
       <div class="proof">
         <div><p><strong>Hands-on privacy technology enhancement, implementation, design, and industry leading build expertise</strong><span>Design through configuration and rollout</span></p></div>
@@ -596,6 +574,74 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
     var body="Name: "+f.name.value+"\nEmail: "+f.email.value+"\nCompany: "+f.company.value+"\nTopic: "+f.topic.value+"\n\n"+f.message.value;
     location.href="mailto:sareen.dev@gmail.com?subject="+encodeURIComponent("Privaryn inquiry: "+f.topic.value)+"&body="+encodeURIComponent(body);
   });
+})();
+</script>
+<script>
+(function(){
+  var c=document.getElementById("globe"); if(!c||!c.getContext) return;
+  var ctx=c.getContext("2d"), reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cs=getComputedStyle(document.documentElement);
+  function rgb(v,d){v=(v||"").trim();var m=/^#?([0-9a-f]{6})$/i.exec(v);if(!m)return d;var n=parseInt(m[1],16);return [(n>>16)&255,(n>>8)&255,n&255];}
+  var T=rgb(cs.getPropertyValue("--teal"),[112,219,203]), L=rgb(cs.getPropertyValue("--line-2"),[42,60,92]);
+  function rgba(a,al){return "rgba("+a[0]+","+a[1]+","+a[2]+","+al+")";}
+  var W=0,H=0,R=0,DPR=1;
+  function size(){var r=c.getBoundingClientRect();if(r.width<2)return false;DPR=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);R=Math.min(W,H)*0.41;return true;}
+  function hs(i,j,k){var n=Math.sin(i*127.1+j*311.7+k*74.7)*43758.5453;return n-Math.floor(n);}
+  function sm(t){return t*t*(3-2*t);}
+  function lp(a,b,t){return a+(b-a)*t;}
+  function vn(x,y,z){var xi=Math.floor(x),yi=Math.floor(y),zi=Math.floor(z),xf=sm(x-xi),yf=sm(y-yi),zf=sm(z-zi);
+    return lp(lp(lp(hs(xi,yi,zi),hs(xi+1,yi,zi),xf),lp(hs(xi,yi+1,zi),hs(xi+1,yi+1,zi),xf),yf),lp(lp(hs(xi,yi,zi+1),hs(xi+1,yi,zi+1),xf),lp(hs(xi,yi+1,zi+1),hs(xi+1,yi+1,zi+1),xf),yf),zf);}
+  var N=2300,pts=[],i;
+  for(i=0;i<N;i++){var y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),th=i*2.399963,x=Math.cos(th)*r,z=Math.sin(th)*r;
+    var n=vn(x*2.1+5,y*2.1+5,z*2.1+5)*.66+vn(x*4.7,y*4.7,z*4.7)*.34;pts.push({x:x,y:y,z:z,land:n>0.5});}
+  function ll(la,lo){la*=Math.PI/180;lo*=Math.PI/180;return [Math.cos(la)*Math.sin(lo),Math.sin(la),Math.cos(la)*Math.cos(lo)];}
+  var cities={nash:[36.16,-86.78],lon:[51.5,-0.12],fra:[50.1,8.68],sin:[1.35,103.8],syd:[-33.9,151.2],sao:[-23.5,-46.6],tok:[35.7,139.7],mum:[19.1,72.9],nyc:[40.7,-74],sfo:[37.8,-122.4],dxb:[25.2,55.3],jnb:[-26.2,28]};
+  var pairs=[["nash","lon"],["nash","fra"],["nash","sin"],["nash","syd"],["nash","sao"],["nash","tok"],["nash","mum"],["nash","dxb"],["nash","jnb"],["nash","sfo"],["lon","sin"],["fra","tok"],["nyc","lon"]];
+  var arcs=pairs.map(function(pr,k){var a=ll(cities[pr[0]][0],cities[pr[0]][1]),b=ll(cities[pr[1]][0],cities[pr[1]][1]);
+    var d=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),w=Math.acos(d),line=[],j,t,s1,s2,v,hh=.10+.16*(w/Math.PI);
+    for(j=0;j<=44;j++){t=j/44;s1=Math.sin((1-t)*w)/Math.sin(w);s2=Math.sin(t*w)/Math.sin(w);v=[a[0]*s1+b[0]*s2,a[1]*s1+b[1]*s2,a[2]*s1+b[2]*s2];var e=1+hh*Math.sin(Math.PI*t);line.push([v[0]*e,v[1]*e,v[2]*e]);}
+    return {line:line,off:k*0.173,hub:pr[0]==="nash"};});
+  var nodes=Object.keys(cities).map(function(k){return {v:ll(cities[k][0],cities[k][1]),hub:k==="nash"};});
+  var ang=0.9,tilt=0.42,tgtTilt=0.42,lastT=0,clock=0;
+  function rot(v,ca,sa,ct,st){var x1=v[0]*ca+v[2]*sa,z1=-v[0]*sa+v[2]*ca,y2=v[1]*ct-z1*st,z2=v[1]*st+z1*ct;return [x1,y2,z2];}
+  function draw(){
+    if(!W&&!size())return;
+    var cx=W/2,cy=H/2,ca=Math.cos(ang),sa=Math.sin(ang),ct=Math.cos(tilt),st=Math.sin(tilt),q,p,k,j;
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createRadialGradient(cx,cy,R*.2,cx,cy,R*1.35);g.addColorStop(0,rgba(T,.07));g.addColorStop(.7,rgba(T,.02));g.addColorStop(1,rgba(T,0));
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*1.35,0,7);ctx.fill();
+    var sg=ctx.createRadialGradient(cx-R*.35,cy-R*.4,R*.1,cx,cy,R);sg.addColorStop(0,"rgba(20,36,62,.85)");sg.addColorStop(1,"rgba(9,17,31,.9)");
+    ctx.fillStyle=sg;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.fill();
+    ctx.lineWidth=1;ctx.strokeStyle=rgba(T,.35);ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+    ctx.strokeStyle=rgba(L,.55);
+    function trace(fn,steps){var prev=null,pt,a;ctx.beginPath();for(var s=0;s<=steps;s++){a=rot(fn(s/steps),ca,sa,ct,st);if(a[2]>0){pt=[cx+a[0]*R,cy-a[1]*R];if(prev)ctx.lineTo(pt[0],pt[1]);else ctx.moveTo(pt[0],pt[1]);prev=pt;}else prev=null;}ctx.stroke();}
+    for(k=-60;k<=60;k+=30)(function(la){trace(function(t){return ll(la,t*360-180);},90);})(k);
+    for(k=0;k<360;k+=30)(function(lo){trace(function(t){return ll(t*180-90,lo);},45);})(k);
+    for(j=0;j<pts.length;j++){q=pts[j];p=rot([q.x,q.y,q.z],ca,sa,ct,st);
+      if(p[2]>0){var al=.18+.5*p[2];if(q.land){ctx.fillStyle=rgba(T,Math.min(.95,al+.25));ctx.fillRect(cx+p[0]*R-1,cy-p[1]*R-1,2,2);}else{ctx.fillStyle="rgba(150,175,205,"+(.1+.22*p[2])+")";ctx.fillRect(cx+p[0]*R-.6,cy-p[1]*R-.6,1.2,1.2);}}
+      else if(q.land){ctx.fillStyle=rgba(T,.07);ctx.fillRect(cx+p[0]*R-.8,cy-p[1]*R-.8,1.6,1.6);}}
+    function vis(a){return a[2]>0||(a[0]*a[0]+a[1]*a[1])>1;}
+    for(k=0;k<arcs.length;k++){var A=arcs[k],pr=null,a2,xy;
+      ctx.lineWidth=A.hub?1.2:1;ctx.strokeStyle=rgba(T,A.hub?.42:.28);ctx.beginPath();
+      for(j=0;j<A.line.length;j++){a2=rot(A.line[j],ca,sa,ct,st);if(vis(a2)){xy=[cx+a2[0]*R,cy-a2[1]*R];if(pr)ctx.lineTo(xy[0],xy[1]);else ctx.moveTo(xy[0],xy[1]);pr=xy;}else pr=null;}
+      ctx.stroke();
+      var ph=(clock*.16+A.off)%1,idx=ph*(A.line.length-1),i0=Math.floor(idx),tr;
+      for(tr=0;tr<9;tr++){var ii=i0-tr;if(ii<0)break;a2=rot(A.line[ii],ca,sa,ct,st);if(!vis(a2))continue;
+        ctx.fillStyle=rgba(T,(1-tr/9)*.95);ctx.beginPath();ctx.arc(cx+a2[0]*R,cy-a2[1]*R,(tr===0?2.6:2)*(1-tr/14),0,7);ctx.fill();}}
+    for(k=0;k<nodes.length;k++){a2=rot(nodes[k].v,ca,sa,ct,st);if(a2[2]<=0.02)continue;
+      var nx=cx+a2[0]*R,ny=cy-a2[1]*R,rad=nodes[k].hub?4.2:2.8,pul=(Math.sin(clock*2+k)+1)/2;
+      ctx.strokeStyle=rgba(T,.5*(1-pul));ctx.lineWidth=1;ctx.beginPath();ctx.arc(nx,ny,rad+pul*9,0,7);ctx.stroke();
+      ctx.fillStyle=nodes[k].hub?"#ecf1f8":rgba(T,1);ctx.beginPath();ctx.arc(nx,ny,rad,0,7);ctx.fill();
+      ctx.strokeStyle=rgba(T,.9);ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(nx,ny,rad+2,0,7);ctx.stroke();}
+  }
+  var running=false,onScreen=true,raf=0;
+  function frame(ts){raf=0;if(!running)return;var dt=lastT?Math.min(.05,(ts-lastT)/1000):0;lastT=ts;clock+=dt;ang+=dt*.13;tilt+=(tgtTilt-tilt)*.04;draw();raf=requestAnimationFrame(frame);}
+  function go(){var want=onScreen&&!document.hidden&&!reduce&&!!c.offsetParent;if(want&&!running){running=true;lastT=0;raf=requestAnimationFrame(frame);}else if(!want&&running){running=false;if(raf)cancelAnimationFrame(raf);raf=0;}}
+  if("IntersectionObserver" in window)new IntersectionObserver(function(es){onScreen=es[0].isIntersecting;go();}).observe(c);
+  document.addEventListener("visibilitychange",go);window.addEventListener("hashchange",function(){setTimeout(function(){W=0;go();if(reduce)draw();},50);});
+  window.addEventListener("resize",function(){W=0;if(reduce)draw();});
+  var hero=c.closest(".hero");if(hero&&!reduce&&window.matchMedia("(pointer:fine)").matches)hero.addEventListener("pointermove",function(e){var b=hero.getBoundingClientRect();tgtTilt=.42+((e.clientY-b.top)/b.height-.5)*.22;});
+  if(reduce){ang=2.2;draw();}else{draw();go();}
 })();
 </script>
 <script>
