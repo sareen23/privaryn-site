@@ -103,9 +103,14 @@ h1 em{font-style:italic;color:var(--teal);font-weight:400}
 .card::before{content:"0" counter(c);font-family:var(--serif);font-size:15px;letter-spacing:.12em;color:var(--teal);margin-bottom:16px}
 .card:hover{border-top-color:var(--teal)}
 .card p{color:var(--muted);font-size:16px}
-.ticks{list-style:none;margin:22px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:grid;gap:10px}
-.ticks li{position:relative;padding-left:22px;font-size:15px;color:var(--text)}
-.ticks li::before{content:"";position:absolute;left:0;top:.8em;width:12px;height:1px;background:var(--teal)}
+.cap-label{margin-top:30px;margin-bottom:6px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+.card .cap-label{font-size:12px;color:var(--muted)}
+.cards.two .cap-label{margin-top:auto;padding-top:30px}
+.ticks{list-style:none;margin:0;padding:0;display:block;border-top:1px solid var(--line-2)}
+.ticks li{position:relative;padding:15px 0 15px 30px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.45;color:var(--text);transition:padding-left .25s ease}
+.ticks li::before{content:"";position:absolute;left:3px;top:50%;width:7px;height:7px;margin-top:-3.5px;background:var(--teal);transform:rotate(45deg);transition:transform .25s ease}
+.ticks li:hover{padding-left:36px}
+.ticks li:hover::before{transform:rotate(45deg) scale(1.25)}
 
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-bottom:72px}
 .pillars div{border-left:1px solid var(--teal);padding-left:20px;font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.3}
@@ -242,7 +247,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
   .art .p{animation:none;opacity:1}
   .art .wire.lit{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
-  .btn,.card,.nav ul a::after{transition:none}
+  .btn,.card,.nav ul a::after,.ticks li,.ticks li::before{transition:none}
 }
 </style>
 </head>
@@ -325,7 +330,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
         <div><p>Outcomes<span>Measured in time saved and audit readiness</span></p></div>
         <div><p>Partnership<span>Senior, hands-on support from start to finish</span></p></div>
       </div>
-      <div class="cards"><article class="card"><h3>Privacy operations</h3><p>Core privacy workflows that scale through automation instead of headcount.</p></article><article class="card"><h3>Consent and preferences</h3><p>Consent infrastructure that keeps marketing moving and stays compliant across regions.</p></article><article class="card"><h3>Third-party risk and GRC</h3><p>Vendor and governance programs your teams will actually use, with reporting leaders can act on.</p></article><article class="card"><h3>Data discovery and governance</h3><p>Know what personal data you hold, where it lives and how long you keep it.</p></article></div>
+      <div class="cards"><article class="card"><h3>Privacy operations</h3><p>Operationalize privacy at enterprise scale, with workflows that run on automation rather than headcount.</p></article><article class="card"><h3>Consent and preferences</h3><p>Consent and preference infrastructure that protects the brand, keeps marketing moving and stays compliant across jurisdictions.</p></article><article class="card"><h3>Third-party risk and GRC</h3><p>Vendor and governance programs that leaders can rely on, with reporting that supports executive and board decisions.</p></article><article class="card"><h3>Data discovery and governance</h3><p>Full visibility into the personal data you hold, where it lives and how long you keep it.</p></article></div>
     </div>
   </section>
 
@@ -373,7 +378,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
     <div class="wrap">
       <h2>Practice areas.</h2>
       <p class="sub">Each area combines process design, platform configuration and the governance to keep it running.</p>
-      <div class="cards two"><article class="card"><h3>Privacy operations</h3><p>Core privacy workflows that scale through automation instead of headcount.</p><ul class="ticks"><li>Data mapping and ROPA</li><li>PIA and DPIA workflows</li><li>Data subject rights fulfillment</li><li>Incident management processes</li></ul></article><article class="card"><h3>Consent and preferences</h3><p>Consent infrastructure that keeps marketing moving and stays compliant across regions.</p><ul class="ticks"><li>Cookie consent management</li><li>Preference center design</li><li>Regional consent rules</li><li>Consent monitoring</li></ul></article><article class="card"><h3>Third-party risk and GRC</h3><p>Vendor and governance programs your teams will actually use, with reporting leaders can act on.</p><ul class="ticks"><li>Risk-tiered vendor intake</li><li>Vendor assessments</li><li>Control mapping to privacy regulations</li><li>Risk reporting</li></ul></article><article class="card"><h3>Data discovery and governance</h3><p>Know what personal data you hold, where it lives and how long you keep it.</p><ul class="ticks"><li>Data discovery and classification</li><li>Data flow validation</li><li>Retention programs</li><li>Data governance processes</li></ul></article></div>
+      <div class="cards two"><article class="card"><h3>Privacy operations</h3><p>Operationalize privacy at enterprise scale, with workflows that run on automation rather than headcount.</p><p class="cap-label">Capabilities</p><ul class="ticks"><li>Data mapping and records of processing (ROPA)</li><li>Privacy and data protection impact assessments (PIA / DPIA)</li><li>Data subject rights request fulfillment</li><li>Incident and breach response workflows</li></ul></article><article class="card"><h3>Consent and preferences</h3><p>Consent and preference infrastructure that protects the brand, keeps marketing moving and stays compliant across jurisdictions.</p><p class="cap-label">Capabilities</p><ul class="ticks"><li>Cookie and tracking consent management</li><li>Preference center strategy and design</li><li>Jurisdiction-specific consent rules</li><li>Ongoing consent monitoring and assurance</li></ul></article><article class="card"><h3>Third-party risk and GRC</h3><p>Vendor and governance programs that leaders can rely on, with reporting that supports executive and board decisions.</p><p class="cap-label">Capabilities</p><ul class="ticks"><li>Risk-tiered vendor intake</li><li>Vendor assessment design and automation</li><li>Control mapping to global privacy regulations</li><li>Executive risk reporting</li></ul></article><article class="card"><h3>Data discovery and governance</h3><p>Full visibility into the personal data you hold, where it lives and how long you keep it.</p><p class="cap-label">Capabilities</p><ul class="ticks"><li>Data discovery and classification</li><li>Data flow validation</li><li>Retention and disposition programs</li><li>Data governance operating model</li></ul></article></div>
     </div>
   </section>
   <section class="alt">
