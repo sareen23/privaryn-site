@@ -222,6 +222,17 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
 .newstab{display:inline-flex;align-items:center;gap:10px;background:var(--bg-3);color:var(--text);border:1px solid var(--line-2);border-top:1px solid var(--teal);border-radius:3px;padding:12px 18px;font:inherit;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:border-color .2s,background .2s}
 .newstab:hover{border-color:var(--teal);background:var(--bg-2)}
 .nt-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(112,219,203,.6);animation:ping 2.4s ease-out infinite}
+.nt-ic{display:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.newsdock{transition:opacity .3s ease,transform .3s ease}
+.newsdock.hold{opacity:0;pointer-events:none;transform:translateY(12px)}
+@media (max-width:860px){
+  .newsdock{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .newstab{position:relative;width:48px;height:48px;padding:0;justify-content:center;border-radius:50%;border-top-color:var(--line-2)}
+  .newstab .nt-label{display:none}
+  .newstab .nt-ic{display:block}
+  .newstab .nt-dot{position:absolute;top:8px;right:8px;width:9px;height:9px}
+  .newspanel{width:calc(100vw - 32px);max-height:min(66vh,520px)}
+}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(112,219,203,.55)}70%{box-shadow:0 0 0 9px rgba(112,219,203,0)}100%{box-shadow:0 0 0 0 rgba(112,219,203,0)}}
 .newspanel{width:min(400px,calc(100vw - 40px));max-height:min(70vh,560px);overflow:auto;background:var(--bg-3);border:1px solid var(--line-2);border-top:1px solid var(--teal);border-radius:3px;box-shadow:0 24px 60px rgba(0,0,0,.55);animation:rise .35s cubic-bezier(.2,.7,.2,1) both}
 .np-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 22px 14px;border-bottom:1px solid var(--line)}
@@ -278,6 +289,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
   .js .rv{opacity:1;transform:none;transition:none}
   .btn,.card,.nav ul a::after,.ticks li,.ticks li::before,.faq summary,.faq summary::after{transition:none}
   .nt-dot,.newspanel{animation:none}
+  .newsdock{transition:none}
 }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do we need to already own a privacy platform?", "acceptedAnswer": {"@type": "Answer", "text": "Not necessarily. Many clients already own a platform and need it configured, automated or brought back in line with how the business runs. Others need help evaluating options and implementing one from the start. We work in both situations."}}, {"@type": "Question", "name": "Which privacy technology platforms and tools do you work with?", "acceptedAnswer": {"@type": "Answer", "text": "OneTrust, BigID, Securiti and Microsoft Purview, as well as homegrown solutions, such as an in-house tool or process your team has already built. Our approach is the same across platforms: design the process first, then configure the technology to support it."}}, {"@type": "Question", "name": "How does an engagement start?", "acceptedAnswer": {"@type": "Answer", "text": "With a conversation about how your organization actually works. From there we assess your current program and tools, then design a program that fits your processes, your people and your technology."}}, {"@type": "Question", "name": "Which privacy laws and regulations do you cover?", "acceptedAnswer": {"@type": "Answer", "text": "We translate U.S. and global privacy regulations, including GDPR and the growing set of U.S. state privacy laws, into practical workflows and platform configuration, and we plan updates as requirements change."}}, {"@type": "Question", "name": "Do you provide legal advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. We design and implement privacy technology and operating processes, and we work alongside your legal and privacy counsel. Nothing on this site is legal advice."}}, {"@type": "Question", "name": "Can you support us after go-live?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Implementation is the starting point. We stay involved to tune the platform, keep your program current with new laws and systems, and bring in senior expertise when you need it."}}, {"@type": "Question", "name": "How do you work with our existing teams?", "acceptedAnswer": {"@type": "Answer", "text": "Alongside them. Our work is senior and hands-on, and we design around the way your teams already operate so the program is adopted and keeps running after we step back."}}, {"@type": "Question", "name": "How is an engagement scoped and priced?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on what you need. You can start with a single assessment, bring us in to design and build, or keep us close as your program grows. Start a conversation and we will recommend a scope that fits."}}]}</script>
@@ -586,7 +598,7 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
     <ul id="news-list"></ul>
     <p class="np-note">Headlines are gathered daily from public sources and link to the original publishers. Privaryn does not endorse linked content.</p>
   </div>
-  <button type="button" class="newstab" id="news-tab" aria-expanded="false" aria-controls="newspanel"><span class="nt-dot" aria-hidden="true"></span>Privacy news</button>
+  <button type="button" class="newstab" id="news-tab" aria-label="Privacy news" aria-expanded="false" aria-controls="newspanel"><span class="nt-dot" aria-hidden="true"></span><svg class="nt-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5h11v14H7a2 2 0 0 1-2-2z"/><path d="M16 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 12h5M8 15h3"/></svg><span class="nt-label">Privacy news</span></button>
 </aside>
 
 <script>
@@ -736,6 +748,15 @@ footer{padding:80px 0 44px;color:var(--muted);font-size:15px;border-top:1px soli
     if(d.updated)upd.textContent="Updated "+fmt(d.updated);
     dock.hidden=false;
   }).catch(function(){});
+  var mq=window.matchMedia("(max-width:860px)"),ticking=false;
+  function hold(){ticking=false;var hero=document.querySelector(".hero"),hide=false;
+    if(mq.matches&&hero&&hero.offsetParent!==null){hide=hero.getBoundingClientRect().bottom>window.innerHeight*0.55;}
+    if(hide&&!panel.hidden)open(false);
+    dock.classList.toggle("hold",hide);}
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(hold);}}
+  window.addEventListener("scroll",req,{passive:true});window.addEventListener("resize",req);window.addEventListener("hashchange",function(){setTimeout(hold,80);});
+  if(mq.addEventListener)mq.addEventListener("change",hold);
+  hold();
   tab.addEventListener("click",function(){open(panel.hidden);});
   cl.addEventListener("click",function(){open(false);tab.focus();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!panel.hidden){open(false);tab.focus();}});
