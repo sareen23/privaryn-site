@@ -363,6 +363,14 @@ CHECKLIST = {
 
 # ------------------------------------------------------------------ helpers
 
+def article_date(a):
+    return a.get("date", PUBLISHED)
+
+def human_date(iso):
+    from datetime import datetime
+    d = datetime.strptime(iso, "%Y-%m-%d")
+    return d.strftime("%B ") + str(d.day) + d.strftime(", %Y")
+
 def css_version():
     import hashlib
     with open(os.path.join(ROOT, "styles.css"), "rb") as f:
@@ -506,7 +514,7 @@ def build_article(a, others):
     mins = read_minutes(a["body"])
     ld = [
         {"@context": "https://schema.org", "@type": "Article", "headline": a["title"], "description": a["desc"],
-         "datePublished": PUBLISHED, "dateModified": PUBLISHED, "image": SITE + "/og-image.png",
+         "datePublished": article_date(a), "dateModified": article_date(a), "image": SITE + "/og-image.png",
          "mainEntityOfPage": url(path), "author": {"@type": "Person", "name": "Dev Sareen"}, "publisher": org_ref()},
         breadcrumb_ld([("/insights/", "Insights"), (path, a["short"])]),
     ]
@@ -518,7 +526,7 @@ def build_article(a, others):
   <div class="page-head article-head"><div class="wrap">
     {crumbs([("/insights/", "Insights"), (path, a["short"])])}
     <h1>{escape(a["title"])}</h1>
-    <p class="a-meta"><span>By Dev Sareen</span><span>{PUBLISHED_HUMAN}</span><span>{mins} min read</span></p>
+    <p class="a-meta"><span>By Dev Sareen</span><span>{human_date(article_date(a))}</span><span>{mins} min read</span></p>
   </div></div>
   <section><div class="wrap"><article class="prose">
 {a["body"]}
@@ -540,7 +548,7 @@ def build_insights_index(mins):
     desc = "Practical thinking on privacy technology, program design and compliance with global privacy laws, from Privaryn."
     items = ""
     for a in ARTICLES:
-        items += f"""<a class="ins-item" href="/insights/{a["slug"]}/"><time datetime="{PUBLISHED}">{PUBLISHED_HUMAN}<br>{mins[a["slug"]]} min read</time><div><h2>{escape(a["title"])}</h2><p>{escape(a["desc"])}</p></div></a>
+        items += f"""<a class="ins-item" href="/insights/{a["slug"]}/"><time datetime="{article_date(a)}">{human_date(article_date(a))}<br>{mins[a["slug"]]} min read</time><div><h2>{escape(a["title"])}</h2><p>{escape(a["desc"])}</p></div></a>
 """
     ld = [{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Privaryn Insights", "url": url(path), "description": desc},
           breadcrumb_ld([(path, "Insights")])]
@@ -652,10 +660,14 @@ def build_industry(ind):
 
 def update_sitemap():
     urls = ["/", "/insights/"] + [f"/insights/{a['slug']}/" for a in ARTICLES] + [f"/resources/{CHECKLIST['slug']}/"] + [f"/industries/{i['slug']}/" for i in INDUSTRIES]
+    dates = {f"/insights/{a['slug']}/": article_date(a) for a in ARTICLES}
+    newest = max([PUBLISHED] + list(dates.values()))
+    dates["/"] = newest
+    dates["/insights/"] = newest
     rows = ""
     for u in urls:
         pr = "1.0" if u == "/" else ("0.8" if u.count("/") == 2 else "0.7")
-        rows += f"  <url>\n    <loc>{SITE}{u}</loc>\n    <lastmod>{PUBLISHED}</lastmod>\n    <changefreq>{'weekly' if u == '/' else 'monthly'}</changefreq>\n    <priority>{pr}</priority>\n  </url>\n"
+        rows += f"  <url>\n    <loc>{SITE}{u}</loc>\n    <lastmod>{dates.get(u, PUBLISHED)}</lastmod>\n    <changefreq>{'weekly' if u == '/' else 'monthly'}</changefreq>\n    <priority>{pr}</priority>\n  </url>\n"
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "</urlset>\n")
 
 def sync_index_css():
