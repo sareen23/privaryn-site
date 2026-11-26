@@ -1,6 +1,18 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "items": [
+  {
+   "title": "Home Office Reprimanded After GDPR Failure at the Border",
+   "url": "https://www.infosecurity-magazine.com/news/home-office-reprimanded-gdpr/",
+   "source": "Infosecurity Magazine",
+   "date": "2026-11-26"
+  },
+  {
+   "title": "Hellenic DPA fines Teleperformance Greece EUR 100 000 for GDPR breaches",
+   "url": "https://www.edpb.europa.eu/news/hellenic-dpa-fines-teleperformance-greece-eur-100-000-for-gdpr-breaches_en",
+   "source": "EDPB",
+   "date": "2026-11-25"
+  },
   {
    "title": "California Regulators Focus on CCPA Opt-Out Compliance",
    "url": "https://www.insideprivacy.com/state-privacy/california-regulators-focus-on-ccpa-opt-out-compliance/",
@@ -12,12 +24,6 @@
    "url": "https://www.infosecurity-magazine.com/news/la-liga-says-football-fans/",
    "source": "Infosecurity Magazine",
    "date": "2026-11-24"
-  },
-  {
-   "title": "Cleverbridge Confirms Customers’ Payment Card Data Breached",
-   "url": "https://www.infosecurity-magazine.com/news/cleverbridge-payment-card-breached/",
-   "source": "Infosecurity Magazine",
-   "date": "2026-11-23"
   },
   {
    "title": "Buyer Beware: Virginia Positioned as the New Privacy Litigation Battleground",
@@ -34,12 +40,6 @@
   {
    "title": "The Norwegian Data Protection Authority fines Social Garden AS for publishing personal data without a lawful basis",
    "url": "https://www.edpb.europa.eu/news/the-norwegian-data-protection-authority-fines-social-garden-as-for-publishing-personal-data_en",
-   "source": "EDPB",
-   "date": "2026-11-19"
-  },
-  {
-   "title": "Norwegian DPA fines private individual for credit check and publication of personal data without a lawful basis",
-   "url": "https://www.edpb.europa.eu/news/norwegian-dpa-fines-private-individual-for-credit-check-and-publication-of-personal-data_en",
    "source": "EDPB",
    "date": "2026-11-19"
   },
