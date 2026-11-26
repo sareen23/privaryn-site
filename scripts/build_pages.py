@@ -465,8 +465,21 @@ els.forEach(function(el){el.classList.add("rv");io.observe(el);});})();
 </html>
 '''
 
+NEWSLETTER = r"""<section class="nl" aria-labelledby="nl-h">
+  <div class="wrap">
+    <div class="nl-copy"><p class="kicker">Newsletter</p><h2 id="nl-h">One practical privacy insight a month.</h2><p>Short, plain-English notes on privacy technology, regulation and how to make programs work. No spam, and you can leave any time.</p></div>
+    <form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/privaryn" method="post" target="_blank">
+      <label for="nl-email" class="sr-only">Email address</label>
+      <div class="nl-row"><input id="nl-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button class="btn" type="submit">Subscribe</button></div>
+      <input type="hidden" value="1" name="embed">
+      <p class="nl-note">Nothing is sent until you press Subscribe. Your email goes to Buttondown, our newsletter provider, in a new tab, and you will confirm by email. See our <a href="/#privacy">privacy notice</a>.</p>
+    </form>
+  </div>
+</section>
+"""
+
 def footer():
-    return f"""<footer>
+    return NEWSLETTER + f"""<footer>
   <div class="wrap">
     <div class="f-top">
       <div><img src="/logo.png" alt="Privaryn" width="120" height="34"><p>Privacy technology consulting that turns regulation into working, automated programs.</p></div>

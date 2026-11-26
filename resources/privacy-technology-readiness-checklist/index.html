@@ -25,7 +25,7 @@
 <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add("js")</script>
-<link rel="stylesheet" href="/styles.css?v=ff5f8d9f">
+<link rel="stylesheet" href="/styles.css?v=14aa545e">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy technology readiness checklist", "description": "A one-page checklist to find out whether your privacy platform and program are set up to deliver, across ownership, process, configuration and measurement.", "url": "https://privarynadvisory.com/resources/privacy-technology-readiness-checklist/", "author": {"@type": "Person", "name": "Dev Sareen"}, "publisher": {"@type": "Organization", "name": "Privaryn", "url": "https://privarynadvisory.com/", "logo": {"@type": "ImageObject", "url": "https://privarynadvisory.com/apple-touch-icon.png"}}, "datePublished": "2026-11-25"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://privarynadvisory.com/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://privarynadvisory.com/insights/"}, {"@type": "ListItem", "position": 3, "name": "Readiness checklist", "item": "https://privarynadvisory.com/resources/privacy-technology-readiness-checklist/"}]}</script>
 </head>
@@ -110,6 +110,17 @@ function upd(){var c=0;boxes.forEach(function(b){if(b.checked)c++;});n.textConte
 m.textContent=c===0?"Tick the statements that are true today to see where you stand.":c<=7?"Several foundations are missing. This is common, and it is the best time to fix them: start with ownership and one or two outcome measures.":c<=14?"You have a good base with some gaps. Focus on the unticked items in the group with the fewest ticks.":"You are in a strong position. Keep the rhythm going: quarterly reviews, a regulatory horizon and regular check-ins with the people using the platform.";}
 boxes.forEach(function(b){b.addEventListener("change",upd);});upd();})();
 </script>
+<section class="nl" aria-labelledby="nl-h">
+  <div class="wrap">
+    <div class="nl-copy"><p class="kicker">Newsletter</p><h2 id="nl-h">One practical privacy insight a month.</h2><p>Short, plain-English notes on privacy technology, regulation and how to make programs work. No spam, and you can leave any time.</p></div>
+    <form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/privaryn" method="post" target="_blank">
+      <label for="nl-email" class="sr-only">Email address</label>
+      <div class="nl-row"><input id="nl-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button class="btn" type="submit">Subscribe</button></div>
+      <input type="hidden" value="1" name="embed">
+      <p class="nl-note">Nothing is sent until you press Subscribe. Your email goes to Buttondown, our newsletter provider, in a new tab, and you will confirm by email. See our <a href="/#privacy">privacy notice</a>.</p>
+    </form>
+  </div>
+</section>
 <footer>
   <div class="wrap">
     <div class="f-top">
