@@ -462,11 +462,12 @@ def footer():
   <div class="wrap">
     <div class="f-top">
       <div><img src="/logo.png" alt="Privaryn" width="120" height="34"><p>Privacy technology consulting that turns regulation into working, automated programs.</p></div>
-      <div><h4>Insights</h4><ul>{"".join(f'<li><a href="/insights/{a["slug"]}/">{escape(a["short"])}</a></li>' for a in ARTICLES)}<li><a href="/resources/{CHECKLIST["slug"]}/">Readiness checklist</a></li></ul></div>
-      <div><h4>Industries</h4><ul>{"".join(f'<li><a href="/industries/{i["slug"]}/">{escape(i["name"])}</a></li>' for i in INDUSTRIES)}</ul></div>
-      <div><h4>Company</h4><ul><li><a href="/#about">About</a></li><li><a href="/#contact">Contact</a></li><li><a href="{CAL}" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></li><li><a href="/#privacy">Privacy notice</a></li></ul></div>
+      <div><p class="fh">Insights</p><ul>{"".join(f'<li><a href="/insights/{a["slug"]}/">{escape(a["short"])}</a></li>' for a in ARTICLES)}<li><a href="/resources/{CHECKLIST["slug"]}/">Readiness checklist</a></li></ul></div>
+      <div><p class="fh">Industries</p><ul>{"".join(f'<li><a href="/industries/{i["slug"]}/">{escape(i["name"])}</a></li>' for i in INDUSTRIES)}</ul></div>
+      <div><p class="fh">Company</p><ul><li><a href="/#about">About</a></li><li><a href="/#contact">Contact</a></li><li><a href="{CAL}" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></li><li><a href="/#privacy">Privacy notice</a></li></ul></div>
     </div>
     <div class="f-bot">
+      <p class="pf">A privacy-first website: no trackers, no third-party fonts, and nothing loads from other companies until you choose to. See our <a href="/#privacy">privacy notice</a>.</p>
       <p>&copy; 2026 Privaryn. All rights reserved.</p>
       <p><button type="button" class="linkbtn" onclick="window.scrollTo(0,0)">Back to top &uarr;</button></p>
       <p>The views expressed are my own and do not constitute legal advice, nor do they constitute an attorney-client relationship. They do not represent the views of any employer or other company.</p>
@@ -539,7 +540,7 @@ def build_insights_index(mins):
     desc = "Practical thinking on privacy technology, program design and compliance with global privacy laws, from Privaryn."
     items = ""
     for a in ARTICLES:
-        items += f"""<a class="ins-item" href="/insights/{a["slug"]}/"><time datetime="{PUBLISHED}">{PUBLISHED_HUMAN}<br>{mins[a["slug"]]} min read</time><div><h3>{escape(a["title"])}</h3><p>{escape(a["desc"])}</p></div></a>
+        items += f"""<a class="ins-item" href="/insights/{a["slug"]}/"><time datetime="{PUBLISHED}">{PUBLISHED_HUMAN}<br>{mins[a["slug"]]} min read</time><div><h2>{escape(a["title"])}</h2><p>{escape(a["desc"])}</p></div></a>
 """
     ld = [{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Privaryn Insights", "url": url(path), "description": desc},
           breadcrumb_ld([(path, "Insights")])]
@@ -555,7 +556,7 @@ def build_insights_index(mins):
 {items}    </div>
     <div class="res-card">
       <p class="eyebrow">Resource</p>
-      <h3>Privacy technology readiness checklist</h3>
+      <h2>Privacy technology readiness checklist</h2>
       <p>A one-page checklist to find out whether your platform and program are set up to deliver. Free to use and print, with no sign-up.</p>
       <a class="btn ghost" href="/resources/{CHECKLIST["slug"]}/">Open the checklist</a>
     </div>
@@ -577,7 +578,7 @@ def build_checklist():
         for it in items:
             n += 1
             rows += f'<label class="cl-item"><input type="checkbox" data-cl><span>{escape(it)}</span></label>\n'
-        groups += f'<div class="cl-group"><h3>{escape(title)}</h3>\n{rows}</div>\n'
+        groups += f'<div class="cl-group"><h2>{escape(title)}</h2>\n{rows}</div>\n'
     total = n
     html = head(c["title"], c["desc"], path, "website", ld, "") + header("insights") + f"""
 <main id="main">
@@ -666,6 +667,23 @@ def sync_index_css():
         with open(path, "w", encoding="utf-8") as f:
             f.write(h2)
 
+def sync_home_teaser():
+    """Keep the home page's 'latest insights' cards in step with the newest three articles."""
+    path = os.path.join(ROOT, "index.html")
+    with open(path, encoding="utf-8") as f:
+        h = f.read()
+    cards = "".join(
+        f'<article class="card"><h3><a href="insights/{a["slug"]}/" style="text-decoration:none">{a["title"]}</a></h3><p>{a["desc"]}</p></article>'
+        for a in ARTICLES[:3]
+    )
+    m = re.search(r'(<section class="alt" id="insights-teaser">.*?<div class="cards" style="grid-template-columns:repeat\(3,1fr\)">)(.*?)(</div>\s*</div>\s*</section>)', h, re.S)
+    if not m:
+        return
+    h2 = h[:m.start(2)] + cards + h[m.end(2):]
+    if h2 != h:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(h2)
+
 def main():
     mins = {}
     for a in ARTICLES:
@@ -676,6 +694,7 @@ def main():
     for i in INDUSTRIES:
         build_industry(i)
     update_sitemap()
+    sync_home_teaser()
     sync_index_css()
     print("built:", len(ARTICLES), "articles,", len(INDUSTRIES), "industry pages, 1 checklist, index, sitemap")
 
