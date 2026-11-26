@@ -188,6 +188,86 @@ ARTICLES = [
     },
 ]
 
+ARTICLES.insert(0, {
+    "slug": "ai-privacy-regulation-zero-trust",
+    "title": "AI is rewriting privacy risk: how to stay ahead with zero trust and privacy principles",
+    "short": "AI, privacy regulation and zero trust",
+    "desc": "AI is changing how personal data is used and how regulators respond. How organizations can stay ahead of shifting rules and keep trust, using zero trust and core privacy principles.",
+    "body": """
+<p class="lede">Artificial intelligence has not created an entirely new set of privacy problems. It has magnified the old ones: more personal data, used in more ways, by more systems, moving faster than most governance can follow. Regulators are responding, and the rules are still changing. The organizations that stay ahead will be the ones that build on durable principles, not on any single law.</p>
+
+<h2>How AI is disrupting privacy</h2>
+<p>Five shifts matter most for privacy and security leaders:</p>
+<ul>
+<li><strong>A growing appetite for data.</strong> Training, tuning and grounding AI systems often involves large volumes of personal data, which strains the principles of purpose limitation and data minimization.</li>
+<li><strong>Inference and profiling.</strong> AI can infer sensitive details, such as health, finances or personal circumstances, from data that looked harmless on its own.</li>
+<li><strong>Opacity.</strong> When an automated system influences a decision about a person, the organization must be able to explain it. That is hard when a model's reasoning is not easy to see.</li>
+<li><strong>New ways for data to leak.</strong> Employees paste confidential or personal information into public AI tools. AI features appear inside software you already use, sometimes switched on without a privacy review. Prompts, outputs and logs become new places where personal data is stored.</li>
+<li><strong>A larger attack surface.</strong> AI agents that can read data and take actions introduce new risks, including prompt injection and over-broad access. This is where privacy and security stop being separate problems.</li>
+</ul>
+
+<h2>How regulation is responding</h2>
+<p>Three patterns stand out, and none of them depends on a single law.</p>
+<ul>
+<li><strong>Existing privacy laws already apply to AI.</strong> Requirements on transparency, lawful use of data, impact assessments and rights around automated decisions apply whether or not AI is mentioned. The GDPR's rules on solely automated decision-making are one long-standing example.</li>
+<li><strong>AI-specific rules are arriving, unevenly.</strong> The EU AI Act takes a risk-based approach with obligations phased in over time, and the EU has moved to delay some high-risk obligations. In the U.S., states are acting individually: California's privacy regulator has adopted rules on automated decision-making technology, while Colorado has replaced its original AI law with a narrower one. The picture differs by jurisdiction and keeps shifting.</li>
+<li><strong>Frameworks are becoming the common yardstick.</strong> Voluntary standards such as the NIST AI Risk Management Framework and ISO/IEC 42001 are increasingly used to show that a program is well run, even where they are not legally required.</li>
+</ul>
+<p>Across all three, the direction is consistent: more documentation, more impact assessment, more transparency, meaningful human oversight and tighter accountability for vendors. Because dates and scope change often, confirm the current position for the places you operate with your legal counsel.</p>
+
+<h2>Why zero trust is the right security lens for AI</h2>
+<p>Zero trust starts from a simple stance: do not grant access because something is "inside" the network. Verify every request, give only the access needed, and assume something may go wrong. NIST describes the approach in its zero trust architecture guidance. It suits AI well, because AI systems and the agents built on them behave like new, very fast users with very broad curiosity.</p>
+<ul>
+<li><strong>Verify explicitly.</strong> Give every user, service and AI agent a verified identity, and authenticate each request, not just the first.</li>
+<li><strong>Use least privilege.</strong> Limit which data an AI system can reach, scope credentials narrowly and let them expire. An assistant that can see everything will eventually reveal something it should not.</li>
+<li><strong>Assume breach.</strong> Segment data, log prompts, outputs and access, and monitor for unusual behavior. Plan for the day a model, a plug-in or a vendor is compromised.</li>
+<li><strong>Verify continuously.</strong> Permissions that made sense at launch drift over time. Re-check them on a schedule.</li>
+</ul>
+
+<h2>Privacy principles are the design rules</h2>
+<p>Zero trust protects data. Privacy principles decide whether the data should be used at all, and how. For AI they translate into practical rules:</p>
+<ul>
+<li><strong>Data minimization.</strong> Use the least personal data the use case needs, and prefer de-identified or synthetic data where it works.</li>
+<li><strong>Purpose limitation.</strong> Decide what a data set may be used for before it goes anywhere near an AI system, and keep to it.</li>
+<li><strong>Transparency.</strong> Tell people when AI is used and how it affects them, in plain language.</li>
+<li><strong>Accountability.</strong> Give every AI use case a named owner, a record of what it does and evidence of the checks performed.</li>
+<li><strong>Privacy by design and by default.</strong> Build protections in from the start, including retention and deletion rules for prompts, outputs and logs.</li>
+</ul>
+
+<h2>Where the two meet</h2>
+<p>Zero trust and privacy ask the same questions from different angles: who or what is accessing which data, for what purpose, for how long, and what evidence do we have? Treating them as one program avoids duplicated controls and gaps between security and privacy teams. A single set of controls covering data classification, access policy, logging, vendor review and assessments can serve both, and can be mapped to many laws and frameworks at once.</p>
+
+<h2>A practical playbook</h2>
+<ol>
+<li><strong>Find your AI.</strong> Build a register of AI use across the organization, including tools staff adopted on their own and AI features embedded in existing software. Record the owner, vendor, data involved and purpose.</li>
+<li><strong>Set data rules.</strong> Classify data, and state plainly what may and may not be entered into AI tools. Give people approved options, so they are not tempted to use unapproved ones.</li>
+<li><strong>Tier by risk.</strong> Extend your privacy and data protection assessments to cover AI. Use light checks for low-risk uses and deeper review for anything affecting people's rights, finances, health or employment.</li>
+<li><strong>Apply zero trust to AI.</strong> Give agents and services their own identities, apply least-privilege access and segmentation, and keep logging and monitoring in place.</li>
+<li><strong>Tighten vendor oversight.</strong> Ask whether your data is used to train models, how long it is kept, who the sub-processors are and what security evidence the vendor can provide. Write the answers into contracts.</li>
+<li><strong>Keep a regulatory horizon.</strong> Assign someone to track changes, map your controls to the laws and frameworks that apply, and review the picture every quarter so updates are planned, not rushed.</li>
+</ol>
+
+<h2>Staying ahead without chasing every rule</h2>
+<p>New AI rules will keep appearing, and some will be delayed, narrowed or replaced. Programs built around one regulation have to be rebuilt each time. Programs built on a small set of durable principles, applied through well-designed workflows, adapt with a mapping update. Our articles on <a href="/insights/turning-privacy-regulation-into-workflows/">turning privacy regulation into workflows</a> and <a href="/insights/why-privacy-platforms-stall-after-go-live/">why privacy platforms stall after go-live</a> show how to make that stick, and <a href="/insights/questions-executives-should-ask-before-investing-in-privacy-technology/">eight questions executives should ask before investing in privacy technology</a> is a useful checklist for leaders.</p>
+
+<h2>Sources and further reading</h2>
+<ul>
+<li>European Commission: <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer">Regulatory framework for AI</a></li>
+<li>CMS: <a href="https://cms.law/en/gbr/publication/the-eu-s-digital-omnibus-on-ai-what-the-provisional-agreement-really-changes" target="_blank" rel="noopener noreferrer">The EU's Digital Omnibus on AI: what the provisional agreement really changes</a></li>
+<li>Skadden: <a href="https://www.skadden.com/insights/publications/2026/06/colorado-repeals-and-replaces-its-ai-act" target="_blank" rel="noopener noreferrer">Colorado repeals and replaces its AI Act</a></li>
+<li>NIST: <a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">SP 800-207, Zero Trust Architecture</a></li>
+<li>NIST: <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">AI Risk Management Framework</a></li>
+</ul>
+""",
+    "takeaways": [
+        "AI magnifies existing privacy risk: more data, more inference and more ways for data to leak.",
+        "Existing privacy laws already apply to AI, and AI-specific rules are arriving unevenly and keep shifting.",
+        "Zero trust protects the data AI touches; privacy principles decide whether and how that data is used.",
+        "Start with a register of AI use, clear data rules, risk-tiered assessments and a vendor review.",
+        "Build on durable principles and map them to many laws, so each new rule is an update, not a rebuild.",
+    ],
+})
+
 INDUSTRIES = [
     {
         "slug": "financial-services",
