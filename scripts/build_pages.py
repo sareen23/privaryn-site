@@ -283,6 +283,11 @@ CHECKLIST = {
 
 # ------------------------------------------------------------------ helpers
 
+def css_version():
+    import hashlib
+    with open(os.path.join(ROOT, "styles.css"), "rb") as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
+
 def words(html_text):
     return len(re.sub(r"<[^>]+>", " ", html_text).split())
 
@@ -324,7 +329,7 @@ def head(title, desc, path, og_type="website", jsonld=None, extra=""):
 <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add("js")</script>
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v={css_version()}">
 {extra}{ld}</head>
 """
 
@@ -572,6 +577,15 @@ def update_sitemap():
         rows += f"  <url>\n    <loc>{SITE}{u}</loc>\n    <lastmod>{PUBLISHED}</lastmod>\n    <changefreq>{'weekly' if u == '/' else 'monthly'}</changefreq>\n    <priority>{pr}</priority>\n  </url>\n"
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "</urlset>\n")
 
+def sync_index_css():
+    path = os.path.join(ROOT, "index.html")
+    with open(path, encoding="utf-8") as f:
+        h = f.read()
+    h2 = re.sub(r'href="styles\.css(\?v=[0-9a-f]+)?"', 'href="styles.css?v=' + css_version() + '"', h, count=1)
+    if h2 != h:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(h2)
+
 def main():
     mins = {}
     for a in ARTICLES:
@@ -582,6 +596,7 @@ def main():
     for i in INDUSTRIES:
         build_industry(i)
     update_sitemap()
+    sync_index_css()
     print("built:", len(ARTICLES), "articles,", len(INDUSTRIES), "industry pages, 1 checklist, index, sitemap")
 
 if __name__ == "__main__":
