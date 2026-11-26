@@ -257,6 +257,7 @@
         <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="actions"><button class="btn" type="submit" id="cform-send">Send message</button><a class="btn ghost" href="https://calendly.com/sareen-dev/30min" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></div>
         <p class="note" id="cform-status" role="status" aria-live="polite"></p>
+        <div class="sent" id="cform-sent" tabindex="-1"><h3>Thank you.</h3><p>Your message has been sent. We will reply to the email address you gave us.</p><div class="actions"><button type="button" class="btn ghost" id="cform-again">Send another message</button><a class="btn ghost" href="https://calendly.com/sareen-dev/30min" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></div></div>
         <p class="note">Your message is sent securely through our form service to our inbox. See our <a href="#privacy" style="color:var(--accent)">privacy notice</a>.</p>
       </form>
       <div class="fact">
@@ -398,18 +399,19 @@
   if(!getC()) openB(false);
 
   (function(){
-    var EMAIL="hello@privarynadvisory.com",f=document.getElementById("cform"),st=document.getElementById("cform-status"),btn=document.getElementById("cform-send");
+    var EMAIL="hello@privarynadvisory.com",f=document.getElementById("cform"),st=document.getElementById("cform-status"),btn=document.getElementById("cform-send"),sent=document.getElementById("cform-sent"),again=document.getElementById("cform-again");
     if(!f)return;
     function mailto(d){location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Privaryn inquiry: "+d.topic)+"&body="+encodeURIComponent("Name: "+d.name+"\nEmail: "+d.email+"\nCompany: "+d.company+"\nTopic: "+d.topic+"\n\n"+d.message);}
-    function say(msg,link){st.textContent=msg+" ";if(link){var a=document.createElement("a");a.href="mailto:"+EMAIL;a.textContent=EMAIL;a.style.color="var(--accent)";st.appendChild(a);st.appendChild(document.createTextNode("."));}}
+    function say(msg,link){st.className="note err";st.textContent=msg+" ";if(link){var a=document.createElement("a");a.href="mailto:"+EMAIL;a.textContent=EMAIL;a.style.color="var(--accent)";st.appendChild(a);st.appendChild(document.createTextNode("."));}}
+    if(again)again.addEventListener("click",function(){f.classList.remove("is-sent");f.name.focus();});
     f.addEventListener("submit",function(e){
       e.preventDefault(); if(!f.reportValidity())return; if(f.botcheck&&f.botcheck.checked)return;
       var d={name:f.name.value,email:f.email.value,company:f.company.value,topic:f.topic.value,message:f.message.value},key=f.dataset.key||"";
       if(key.indexOf("REPLACE")===0||!window.fetch){mailto(d);return;}
-      btn.disabled=true;btn.textContent="Sending...";st.textContent="";
+      btn.disabled=true;btn.textContent="Sending...";st.textContent="";st.className="note";
       fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:key,subject:"Privaryn inquiry: "+d.topic,from_name:d.name,name:d.name,email:d.email,company:d.company,topic:d.topic,message:d.message,botcheck:""})})
       .then(function(r){return r.json();})
-      .then(function(j){if(j&&j.success){f.reset();say("Thank you. Your message has been sent and we will reply soon.");}else{throw new Error("fail");}})
+      .then(function(j){if(j&&j.success){f.reset();st.textContent="";st.className="note";f.classList.add("is-sent");sent.scrollIntoView({block:"center"});sent.focus({preventScroll:true});}else{throw new Error("fail");}})
       .catch(function(){say("Sorry, that did not send. Please email us at",true);})
       .then(function(){btn.disabled=false;btn.textContent="Send message";});
     });
