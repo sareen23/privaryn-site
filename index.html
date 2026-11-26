@@ -244,7 +244,7 @@
   </div></div>
   <section>
     <div class="wrap contact-grid">
-      <form id="cform" novalidate>
+      <form id="cform" novalidate data-key="REPLACE_WITH_WEB3FORMS_KEY">
         <div class="fr">
           <label>Name<input name="name" autocomplete="name" required></label>
           <label>Work email<input name="email" type="email" autocomplete="email" required></label>
@@ -254,8 +254,10 @@
           <label>Topic<select name="topic"><option>Privacy operations</option><option>Consent and preferences</option><option>Third-party risk and GRC</option><option>Data discovery and governance</option><option>Program assessment</option><option>Something else</option></select></label>
         </div>
         <label>How can we help?<textarea name="message" required></textarea></label>
-        <div class="actions"><button class="btn" type="submit">Send by email</button><a class="btn ghost" href="https://calendly.com/sareen-dev/30min" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></div>
-        <p class="note">This opens your email app with your message filled in. See our <a href="#privacy" style="color:var(--accent)">privacy notice</a>.</p>
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <div class="actions"><button class="btn" type="submit" id="cform-send">Send message</button><a class="btn ghost" href="https://calendly.com/sareen-dev/30min" target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call (opens Calendly in a new tab)">Book a 30-minute call</a></div>
+        <p class="note" id="cform-status" role="status" aria-live="polite"></p>
+        <p class="note">Your message is sent securely through our form service to our inbox. See our <a href="#privacy" style="color:var(--accent)">privacy notice</a>.</p>
       </form>
       <div class="fact">
         <div><p><strong>Book a call</strong><span><a href="https://calendly.com/sareen-dev/30min" target="_blank" rel="noopener noreferrer" style="color:var(--accent)" aria-label="Schedule a 30-minute call (opens Calendly in a new tab)">Schedule 30 minutes</a> with Dev Sareen</span></p></div>
@@ -276,7 +278,7 @@
     <p>Privaryn is a privacy consulting practice based in Nashville, Tennessee. This notice explains how we handle personal information when you visit this website or contact us. If you have questions, email <a href="mailto:sareen.dev@gmail.com">sareen.dev@gmail.com</a>.</p>
     <h2>Information we collect</h2>
     <ul>
-      <li><strong>Information you send us.</strong> When you email us, including through the contact form, we receive your name, email address, company and anything you include in your message. The contact form does not store your details on this site; it opens your own email app.</li>
+      <li><strong>Information you send us.</strong> When you email us, including through the contact form, we receive your name, email address, company and anything you include in your message. If you use the contact form, your message is sent through Web3Forms, a form-handling service, which passes it to our email inbox. Nothing is loaded from Web3Forms until you press send, and this site does not store the message itself.</li>
       <li><strong>Technical information.</strong> Like most websites, our hosting provider automatically receives basic technical data such as your IP address, browser type and the pages you request, so the site can load. Fonts and other site files are served from our own site, so no other companies receive this data when you browse.</li>
       <li><strong>Booking a call.</strong> If you choose to book a call, the link takes you to Calendly, a scheduling service, in a new tab. Calendly collects the details you enter there under its own privacy policy. Our site loads nothing from Calendly unless you click the link.</li>
       <li><strong>Links to other sites.</strong> Headlines in our Privacy news panel link to other publishers&rsquo; websites. Their own privacy practices apply once you click through.</li>
@@ -289,7 +291,7 @@
     <h2>Cookies and similar technologies</h2>
     <p>This website does not currently use analytics or advertising cookies. It uses one strictly necessary browser storage entry to remember your cookie choice. If we add analytics in the future, it will stay off unless you accept it. You can change your choice at any time with the Cookie settings link in the footer.</p>
     <h2>Who we share it with</h2>
-    <p>We share information only with service providers that help us operate, such as our website host, email provider and, if you book a call, our scheduling provider Calendly, and when required by law. These providers may process data outside your country; where required, we rely on appropriate safeguards for those transfers.</p>
+    <p>We share information only with service providers that help us operate, such as our website host, email provider, our contact form provider Web3Forms and, if you book a call, our scheduling provider Calendly, and when required by law. These providers may process data outside your country; where required, we rely on appropriate safeguards for those transfers.</p>
     <h2>How long we keep it</h2>
     <p>We keep inquiry emails for as long as needed to respond and maintain a business relationship, and then delete them unless we need to keep them for legal or accounting reasons.</p>
     <h2>Your rights</h2>
@@ -395,12 +397,23 @@
   document.getElementById("ck-open").onclick=function(){openB(true);};
   if(!getC()) openB(false);
 
-  document.getElementById("cform").addEventListener("submit",function(e){
-    e.preventDefault(); var f=e.target;
-    if(!f.reportValidity()) return;
-    var body="Name: "+f.name.value+"\nEmail: "+f.email.value+"\nCompany: "+f.company.value+"\nTopic: "+f.topic.value+"\n\n"+f.message.value;
-    location.href="mailto:sareen.dev@gmail.com?subject="+encodeURIComponent("Privaryn inquiry: "+f.topic.value)+"&body="+encodeURIComponent(body);
-  });
+  (function(){
+    var EMAIL="sareen.dev@gmail.com",f=document.getElementById("cform"),st=document.getElementById("cform-status"),btn=document.getElementById("cform-send");
+    if(!f)return;
+    function mailto(d){location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Privaryn inquiry: "+d.topic)+"&body="+encodeURIComponent("Name: "+d.name+"\nEmail: "+d.email+"\nCompany: "+d.company+"\nTopic: "+d.topic+"\n\n"+d.message);}
+    function say(msg,link){st.textContent=msg+" ";if(link){var a=document.createElement("a");a.href="mailto:"+EMAIL;a.textContent=EMAIL;a.style.color="var(--accent)";st.appendChild(a);st.appendChild(document.createTextNode("."));}}
+    f.addEventListener("submit",function(e){
+      e.preventDefault(); if(!f.reportValidity())return; if(f.botcheck&&f.botcheck.checked)return;
+      var d={name:f.name.value,email:f.email.value,company:f.company.value,topic:f.topic.value,message:f.message.value},key=f.dataset.key||"";
+      if(key.indexOf("REPLACE")===0||!window.fetch){mailto(d);return;}
+      btn.disabled=true;btn.textContent="Sending...";st.textContent="";
+      fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:key,subject:"Privaryn inquiry: "+d.topic,from_name:d.name,name:d.name,email:d.email,company:d.company,topic:d.topic,message:d.message,botcheck:""})})
+      .then(function(r){return r.json();})
+      .then(function(j){if(j&&j.success){f.reset();say("Thank you. Your message has been sent and we will reply soon.");}else{throw new Error("fail");}})
+      .catch(function(){say("Sorry, that did not send. Please email us at",true);})
+      .then(function(){btn.disabled=false;btn.textContent="Send message";});
+    });
+  })();
 })();
 </script>
 <script>
