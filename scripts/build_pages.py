@@ -528,7 +528,7 @@ def build_article(a, others):
     ld = [
         {"@context": "https://schema.org", "@type": "Article", "headline": a["title"], "description": a["desc"],
          "datePublished": article_date(a), "dateModified": article_date(a), "image": SITE + "/og-image.png",
-         "mainEntityOfPage": url(path), "author": {"@type": "Person", "name": "Dev Sareen"}, "publisher": org_ref()},
+         "mainEntityOfPage": url(path), "author": {"@type": "Organization", "name": "Privaryn", "url": SITE + "/"}, "publisher": org_ref()},
         breadcrumb_ld([("/insights/", "Insights"), (path, a["short"])]),
     ]
     takeaways = "".join(f"<li>{escape(t)}</li>" for t in a["takeaways"])
@@ -539,7 +539,7 @@ def build_article(a, others):
   <div class="page-head article-head"><div class="wrap">
     {crumbs([("/insights/", "Insights"), (path, a["short"])])}
     <h1>{escape(a["title"])}</h1>
-    <p class="a-meta"><span>By Dev Sareen</span><span>{human_date(article_date(a))}</span><span>{mins} min read</span></p>
+    <p class="a-meta"><span>{human_date(article_date(a))}</span><span>{mins} min read</span></p>
   </div></div>
   <section><div class="wrap"><article class="prose">
 {a["body"]}
@@ -590,7 +590,7 @@ def build_checklist():
     c = CHECKLIST
     path = f"/resources/{c['slug']}/"
     ld = [{"@context": "https://schema.org", "@type": "WebPage", "name": c["title"], "description": c["desc"], "url": url(path),
-           "author": {"@type": "Person", "name": "Dev Sareen"}, "publisher": org_ref(), "datePublished": PUBLISHED},
+           "author": {"@type": "Organization", "name": "Privaryn", "url": SITE + "/"}, "publisher": org_ref(), "datePublished": PUBLISHED},
           breadcrumb_ld([("/insights/", "Insights"), (path, "Readiness checklist")])]
     groups = ""
     n = 0
